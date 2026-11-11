@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kessigen Ramasubboo — Computer Science &amp; Machine Learning</title>
+  <meta name="description" content="Kessigen Ramasubboo — MSc Computer Science student at the University of Montreal working on machine learning, LLM systems, reinforcement learning and optimization.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f6f8fa;
+      --text: #1a1a1a;
+      --muted: #5f6368;
+      --line: #e3e6ea;
+      --accent: #1a5fb4;   /* change this one color to restyle the whole page */
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1216;
+        --surface: #171b21;
+        --text: #e8ebef;
+        --muted: #9aa1aa;
+        --line: #2a3038;
+        --accent: #6ea8fe;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 17px;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+
+    /* Navigation */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    nav .wrap {
+      display: flex; justify-content: space-between; align-items: center;
+      height: 60px;
+    }
+    .logo { font-family: "Fraunces", serif; font-size: 20px; color: var(--text); }
+    .logo:hover { text-decoration: none; }
+    nav ul { display: flex; gap: 22px; list-style: none; }
+    nav ul a { color: var(--muted); font-size: 15px; }
+    nav ul a:hover { color: var(--text); text-decoration: none; }
+
+    /* Intro */
+    .intro { padding: 72px 0 56px; display: flex; gap: 40px; align-items: flex-start; }
+    .intro .text { flex: 1; }
+    .intro h1 {
+      font-family: "Fraunces", serif; font-weight: 600;
+      font-size: 34px; line-height: 1.2; letter-spacing: -0.01em; margin-bottom: 4px;
+    }
+    .intro .role { color: var(--muted); font-size: 16px; margin-bottom: 22px; }
+    .intro p + p { margin-top: 14px; }
+    .intro .contact { margin-top: 22px; font-size: 16px; color: var(--muted); }
+    .intro .photo {
+      width: 150px; height: 150px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
+    }
+
+    /* Sections */
+    section { padding: 56px 0; border-top: 1px solid var(--line); }
+    h2 {
+      font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--muted); font-weight: 500; margin-bottom: 24px;
+    }
+    section p + p { margin-top: 14px; }
+
+    /* Timeline (experience / education) */
+    .item { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; }
+    .item + .item { margin-top: 28px; }
+    .item h3 { font-size: 18px; font-weight: 500; }
+    .item .when { color: var(--muted); font-size: 14px; white-space: nowrap; padding-top: 3px; }
+    .item .where { grid-column: 1 / -1; color: var(--muted); font-size: 15px; }
+    .item ul { grid-column: 1 / -1; margin: 10px 0 0 18px; }
+    .item li { font-size: 16px; }
+    .item li + li { margin-top: 6px; }
+
+    /* Projects */
+    .projects { display: grid; gap: 16px; }
+    .card {
+      display: block; padding: 22px 24px; border-radius: 12px;
+      background: var(--surface); border: 1px solid var(--line);
+      color: var(--text); transition: border-color .15s, transform .15s;
+    }
+    a.card:hover { border-color: var(--accent); transform: translateY(-2px); text-decoration: none; }
+    .card .head { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; margin-bottom: 6px; }
+    .card h3 { font-size: 18px; font-weight: 500; }
+    a.card h3::after { content: " →"; color: var(--accent); }
+    .card .date { color: var(--muted); font-size: 13px; white-space: nowrap; }
+    .card p { color: var(--muted); font-size: 15px; }
+    .card .shot { display: block; width: 100%; border-radius: 8px; border: 1px solid var(--line); margin-bottom: 16px; }
+    .clips { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 16px; }
+    .clips figure { margin: 0; }
+    .clips video { display: block; width: 100%; border-radius: 8px; border: 1px solid var(--line); background: #000; }
+    .clips figcaption { font-size: 12px; color: var(--muted); margin-top: 5px; }
+    .card .stat { color: var(--text); font-weight: 500; }
+    .tags { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .tags span {
+      font-size: 12px; padding: 3px 10px; border-radius: 99px;
+      background: var(--bg); border: 1px solid var(--line); color: var(--muted);
+    }
+
+    /* Skills */
+    .skill-group + .skill-group { margin-top: 22px; }
+    .skill-group h3 { font-size: 15px; font-weight: 500; margin-bottom: 10px; }
+    .skills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skills span {
+      padding: 6px 13px; border-radius: 8px; font-size: 14px;
+      background: var(--surface); border: 1px solid var(--line);
+    }
+
+    /* Small list */
+    .plain { list-style: none; }
+    .plain li { padding: 10px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; }
+    .plain li:last-child { border-bottom: none; }
+    .plain .when { color: var(--muted); font-size: 14px; white-space: nowrap; }
+
+    /* Contact */
+    .links { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 18px; }
+
+    footer { padding: 40px 0 56px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+
+    @media (max-width: 560px) {
+      nav ul { gap: 14px; }
+      nav ul li.hide-sm { display: none; }
+      .intro { flex-direction: column-reverse; gap: 24px; padding: 48px 0 40px; }
+      .intro .photo { width: 110px; height: 110px; }
+      .item { grid-template-columns: 1fr; }
+      .card .head { flex-direction: column; gap: 2px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="wrap">
+      <a href="#" class="logo">Kessigen R.</a>
+      <ul>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="wrap">
+    <div class="intro">
+      <div class="text">
+        <h1>Kessigen Ramasubboo</h1>
+        <div class="role">MSc student in Computer Science, University of Montreal</div>
+
+        <p>I'm a master's student at the <a href="https://www.umontreal.ca/en/" target="_blank" rel="noopener">University of Montreal</a>, where I work mostly on reinforcement learning and LLM-based systems. Before that I did a BSc in Mathematics at <a href="https://www.ubc.ca/" target="_blank" rel="noopener">UBC</a> in Vancouver, and I grew up in Mauritius.</p>
+        <p>I've also spent six months as a full-stack developer intern at Schooly Cybersecurity. I'm currently looking for internships.</p>
+
+        <div class="contact">
+          <a href="mailto:ejilendragon@gmail.com">Email</a>&nbsp;&nbsp;/&nbsp;
+          <a href="resume.pdf" target="_blank" rel="noopener">CV</a>&nbsp;&nbsp;/&nbsp;
+          <a href="https://github.com/kessigen" target="_blank" rel="noopener">GitHub</a>&nbsp;&nbsp;/&nbsp;
+          <a href="https://www.linkedin.com/in/kessigen-ramasubboo-16b02b318" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <!-- Add a photo of yourself to the repo as profile.jpg and it will show here. -->
+      <img class="photo" src="profile.jpg" alt="Kessigen Ramasubboo" onerror="this.style.display='none'">
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="item">
+        <h3>Full-Stack Developer Intern</h3>
+        <span class="when">Jul 2024 – Jan 2025</span>
+        <span class="where">Schooly Cybersecurity · 400+ hours</span>
+        <ul>
+          <li>Independently developed most of a React frontend integrated with a Django backend.</li>
+          <li>Designed and managed a Supabase database and set up Strapi CMS for content management.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects">
+
+        <a class="card" href="https://github.com/kessigen/scaling_crl-_project_baselines" target="_blank" rel="noopener">
+          <div class="clips">
+            <figure>
+              <video src="sac-pose.mp4" poster="sac-pose.jpg" autoplay muted loop playsinline aria-label="WidowX arm moving a cube, SAC policy with pose observations"></video>
+              <figcaption>SAC, pose observations</figcaption>
+            </figure>
+            <figure>
+              <video src="sac-drq-image.mp4" poster="sac-drq-image.jpg" autoplay muted loop playsinline aria-label="WidowX arm moving a cube, SAC with DrQ from image observations"></video>
+              <figcaption>SAC + DrQ, image observations</figcaption>
+            </figure>
+          </div>
+          <div class="head"><h3>SAC Baselines for Robotic Pick-and-Place</h3><span class="date">Apr 2026</span></div>
+          <p>Compared reinforcement learning methods on a simulated WidowX-250 arm. I built the MuJoCo pick-and-place environment, including the reward shaping that finally stopped the arm hovering next to the cube, and the SAC baselines the contrastive RL models were measured against: SAC on pose observations reached <span class="stat">90%</span> success, and SAC + DrQ on camera images reached <span class="stat">50%</span>. For the image baseline I tried SB3's CNN policy, a custom pixel encoder and a SAC autoencoder before settling on DrQ. Against these baselines, the project's contrastive RL method, built by my teammate, raised image-based success from 50% to <span class="stat">80%</span>, and a 32-layer version reached <span class="stat">85%</span>.</p>
+          <div class="tags"><span>Reinforcement learning</span><span>MuJoCo</span><span>SAC</span><span>DrQ</span><span>PyTorch</span><span>Stable-Baselines3</span></div>
+        </a>
+
+        <a class="card" href="https://github.com/kessigen/Augmented-Reader" target="_blank" rel="noopener">
+          <img class="shot" src="augmented-reader.jpg" alt="Augmented Reader architecture: Next.js frontend, Django backend with RAG, summarizer, image generation and metadata modules" loading="lazy">
+          <div class="head"><h3>Augmented Reader: AI-Powered Ebook App</h3><span class="date">Dec 2025</span></div>
+          <p>A web app that turns static ebooks into interactive reading experiences. Four LLM tools (summarization, image generation, metadata extraction and RAG querying) produce chapter summaries, character sheets with portraits, relationship graphs, mood-based music, scene images and a book-specific Q&amp;A assistant.</p>
+          <div class="tags"><span>LLMs</span><span>RAG</span><span>LangChain</span><span>Next.js</span><span>Django</span></div>
+        </a>
+
+        <div class="card">
+          <div class="head"><h3>OS Task Scheduling as Integer Programming</h3><span class="date">Feb 2025</span></div>
+          <p>Modelled CPU task scheduling as an integer program to improve utilization and cut wait times, implemented with Gurobi and benchmarked against heuristic schedulers, including trade-offs in fairness and latency.</p>
+          <div class="tags"><span>Optimization</span><span>Gurobi</span><span>Python</span></div>
+        </div>
+
+        <div class="card">
+          <div class="head"><h3>Texas Power Grid as a Network Flow Problem</h3><span class="date">Jan 2025</span></div>
+          <p>Team project modelling energy transmission across the Texas grid and optimizing it in Python to minimize both cost and greenhouse-gas emissions.</p>
+          <div class="tags"><span>Network flow</span><span>Operations research</span><span>Python</span></div>
+        </div>
+
+        <div class="card">
+          <div class="head"><h3>Spatio-Temporal Spread of COVID-19</h3><span class="date">Feb 2025</span></div>
+          <p>A PDE model based on predator–prey dynamics, simulating spread through population centres over time and testing scenarios from full recovery to wipeout.</p>
+          <div class="tags"><span>PDEs</span><span>Simulation</span><span>Python</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="skill-group">
+        <h3>Languages</h3>
+        <div class="skills"><span>Python</span><span>Java</span><span>C</span><span>C++</span><span>R</span><span>MATLAB</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>Frameworks &amp; tools</h3>
+        <div class="skills"><span>PyTorch</span><span>Stable-Baselines3</span><span>MuJoCo</span><span>LangChain</span><span>Gurobi</span><span>React</span><span>Next.js</span><span>Django</span><span>Supabase</span></div>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <div class="item">
+        <h3>MSc, Computer Science</h3>
+        <span class="when">Sep 2025 – Present</span>
+        <span class="where">University of Montreal · Montreal, QC</span>
+      </div>
+      <div class="item">
+        <h3>BSc, Major in Mathematics</h3>
+        <span class="when">Sep 2021 – May 2025</span>
+        <span class="where">University of British Columbia · Vancouver, BC</span>
+      </div>
+    </section>
+
+    <section id="achievements">
+      <h2>Achievements</h2>
+      <ul class="plain">
+        <li><span>Ranked 5th nationally in Computer Science, Cambridge A Level (Mauritius)</span><span class="when">2021</span></li>
+        <li><span>Ranked 2nd nationally in Chemistry, Cambridge O Level (Mauritius)</span><span class="when">2018</span></li>
+      </ul>
+    </section>
+
+    <section id="french">
+      <h2>French language</h2>
+      <ul class="plain">
+        <li><span>DELF B2 certification</span><span class="when">2023</span></li>
+        <li><span>Ranked 3rd nationally in French, Cambridge O Level (Mauritius)</span><span class="when">2018</span></li>
+        <li><span>Finalist, 24e Championnat Régional d'Orthographe (national representative)</span><span class="when">2017</span></li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Open to internships and full-time roles in ML and software. I'd love to hear from you.</p>
+      <div class="links">
+        <a href="mailto:ejilendragon@gmail.com">Email</a>
+        <a href="https://github.com/kessigen" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/kessigen-ramasubboo-16b02b318" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © <span id="year"></span> Kessigen Ramasubboo · Hosted on GitHub Pages
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
